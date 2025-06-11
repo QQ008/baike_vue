@@ -1,0 +1,548 @@
+/* 高级设计系统 - 精致的视觉语言 */
+:root {
+  /* 字体系统 - 优雅的字体层级 */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  /* 精致的色彩系统 */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  
+  /* 语义化颜色 */
+  --color-primary: var(--color-blue-500);
+  --color-primary-hover: var(--color-blue-600);
+  --color-primary-active: var(--color-blue-700);
+  
+  --color-text-primary: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-600);
+  --color-text-tertiary: var(--color-slate-500);
+  --color-text-quaternary: var(--color-slate-400);
+  
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: var(--color-slate-50);
+  --color-bg-tertiary: var(--color-slate-100);
+  
+  --color-border-primary: var(--color-slate-200);
+  --color-border-secondary: var(--color-slate-300);
+  
+  /* 精致的阴影系统 */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* 高级渐变 */
+  --gradient-primary: linear-gradient(135deg, var(--color-blue-500) 0%, var(--color-blue-700) 100%);
+  --gradient-surface: linear-gradient(135deg, #ffffff 0%, var(--color-slate-50) 100%);
+  --gradient-hero: linear-gradient(135deg, var(--color-slate-50) 0%, var(--color-slate-100) 50%, var(--color-slate-200) 100%);
+  
+  /* 动画缓动 */
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* 间距系统 */
+  --space-xs: 0.25rem;   /* 4px */
+  --space-sm: 0.5rem;    /* 8px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+  --space-4xl: 6rem;     /* 96px */
+  
+  /* 圆角系统 */
+  --radius-sm: 0.375rem;  /* 6px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 1rem;      /* 16px */
+  --radius-2xl: 1.5rem;   /* 24px */
+  --radius-full: 9999px;
+  
+  /* 文字渲染优化 */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* 深色主题 - 保持一致的高级感 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text-primary: var(--color-slate-100);
+    --color-text-secondary: var(--color-slate-300);
+    --color-text-tertiary: var(--color-slate-400);
+    --color-text-quaternary: var(--color-slate-500);
+    
+    --color-bg-primary: var(--color-slate-900);
+    --color-bg-secondary: var(--color-slate-800);
+    --color-bg-tertiary: var(--color-slate-700);
+    
+    --color-border-primary: var(--color-slate-700);
+    --color-border-secondary: var(--color-slate-600);
+    
+    --gradient-surface: linear-gradient(135deg, var(--color-slate-900) 0%, var(--color-slate-800) 100%);
+    --gradient-hero: linear-gradient(135deg, var(--color-slate-900) 0%, var(--color-slate-800) 50%, var(--color-slate-700) 100%);
+  }
+}
+
+/* 全局重置 - 现代化的重置方案 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+}
+
+body {
+  font-family: inherit;
+  line-height: inherit;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 优雅的字体层级系统 */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.875rem);
+}
+
+h4 {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* 精致的链接样式 */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: all 0.3s var(--ease-out-cubic);
+  position: relative;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* 现代化的按钮系统 */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-cubic);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 表单元素优化 */
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  transition: all 0.3s var(--ease-out-cubic);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 滚动条优化 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-secondary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* 选择文本样式 */
+::selection {
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--color-text-primary);
+}
+
+/* 图片优化 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 无障碍优化 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a, a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  
+  .app-nav,
+  .app-footer {
+    display: none;
+  }
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 优雅的字体层级系统 */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.875rem);
+}
+
+h4 {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* 精致的链接样式 */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: all 0.3s var(--ease-out-cubic);
+  position: relative;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* 现代化的按钮系统 */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-cubic);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 精致的表单元素 */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: all 0.3s var(--ease-out-cubic);
+  padding: var(--space-md);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-quaternary);
+}
+
+/* 精致的滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-secondary);
+  border-radius: var(--radius-full);
+  transition: background 0.3s var(--ease-out-cubic);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* 优雅的选择样式 */
+::selection {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: var(--color-text-primary);
+}
+
+/* 响应式媒体 */
+img,
+video,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 无障碍支持 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border-primary: var(--color-text-primary);
+    --color-border-secondary: var(--color-text-primary);
+  }
+}
+
+/* 打印优化 */
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  @page {
+    margin: 0.5in;
+  }
+}
+
+/* 实用工具类 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 动画关键帧 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 性能优化 */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
